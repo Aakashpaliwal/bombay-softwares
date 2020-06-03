@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./imagegrid.css";
+import FilterImageGrid from "./FilterImageGrid";
+
 const key = "olFKDlOJvm_Rm97aVlPs7j-yRe_ixTempI6ishtyy2E";
 
 class ImageGrid extends Component {
@@ -29,9 +31,9 @@ class ImageGrid extends Component {
 		});
 	};
 
-	submitHandler = (e) => {
+	submitHandler = async (e) => {
 		e.preventDefault();
-		let response = axios
+		await axios
 			.get(
 				`https://api.unsplash.com/search/photos/?query=${this.state.query}/&client_id=${key}`
 			)
@@ -47,8 +49,8 @@ class ImageGrid extends Component {
 	render() {
 		let filtered_images_component;
 		if (this.state.filtered_images) {
-			filtered_images_component = (
-				<section className="grid">
+			filtered_images_component = {
+				/*<section className="grid">
 					{this.state.search_images.length ? (
 						this.state.search_images.map(function (item, index) {
 							return (
@@ -68,8 +70,8 @@ class ImageGrid extends Component {
 					) : (
 						<div className="loading" />
 					)}
-				</section>
-			);
+				</section>*/
+			};
 		} else {
 			filtered_images_component = (
 				<section className="grid">
@@ -125,7 +127,46 @@ class ImageGrid extends Component {
 									</div>
 								</div>
 								<div className="">
-									{filtered_images_component}
+									{/*{filtered_images_component}*/}
+									{this.state.filtered_images ? (
+										<FilterImageGrid
+											filterImageValue={
+												this.state.search_images
+											}
+										/>
+									) : (
+										<section className="grid">
+											{this.state.images.length ? (
+												this.state.images.map(function (
+													item,
+													index
+												) {
+													return (
+														<div
+															key={index}
+															className={`item item-${Math.ceil(
+																item.height /
+																	item.width
+															)}`}
+														>
+															<img
+																src={
+																	item.urls
+																		.small
+																}
+																alt={
+																	item.user
+																		.username
+																}
+															/>
+														</div>
+													);
+												})
+											) : (
+												<div className="loading" />
+											)}
+										</section>
+									)}
 								</div>
 							</div>
 						</div>
