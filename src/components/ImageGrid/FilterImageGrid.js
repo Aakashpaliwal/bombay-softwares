@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function FilterImageGrid(props) {
 	const [filterImages, setFilterImages] = useState([]);
@@ -6,7 +6,7 @@ function FilterImageGrid(props) {
 	useEffect(() => {
 		const response = props.filterImageValue;
 		setFilterImages(response);
-	});
+	}, [props.filterImageValue]);
 
 	return (
 		<div>
