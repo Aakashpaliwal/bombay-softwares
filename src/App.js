@@ -1,16 +1,20 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header/Header";
-import ImageGrid from "./components/ImageGrid/ImageGrid";
+
+const ImageGrid = lazy(() => import("./components/ImageGrid/ImageGrid"));
+const renderLoader = () => <div className="loading" />;
 
 function App() {
-  return (
-    <div>
-      <Header />
-      <ImageGrid />
-    </div>
-  );
+	return (
+		<div>
+			<Header />
+			<Suspense fallback={renderLoader()}>
+				<ImageGrid />
+			</Suspense>
+		</div>
+	);
 }
 
 export default App;

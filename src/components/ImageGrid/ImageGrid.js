@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import axios from "axios";
 import "./imagegrid.css";
-import FilterImageGrid from "./FilterImageGrid";
 import SearchBox from "../SearchBox/SearchBox";
 import Pagination from "./Pagination";
 
 const key = "olFKDlOJvm_Rm97aVlPs7j-yRe_ixTempI6ishtyy2E";
+const FilterImageGrid = lazy(() => import("./FilterImageGrid"));
+const renderLoader = () => <div className="loading" />;
 
 class ImageGrid extends Component {
 	constructor(props) {
@@ -66,11 +67,13 @@ class ImageGrid extends Component {
 								<SearchBox getQueryFunction={this.setQuery} />
 								<div className="">
 									{this.state.filtered_images ? (
-										<FilterImageGrid
-											filterImageValue={
-												this.state.search_images
-											}
-										/>
+										<Suspense fallback={renderLoader()}>
+											<FilterImageGrid
+												filterImageValue={
+													this.state.search_images
+												}
+											/>
+										</Suspense>
 									) : (
 										<section className="grid">
 											{this.state.images.length ? (
