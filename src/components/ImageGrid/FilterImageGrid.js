@@ -41,7 +41,7 @@ class FilterImageGrid extends Component {
 					{this.state.filterImages.length ? (
 						this.state.filterImages.map(function (item, index) {
 							return (
-								<div key={index} className="grid__item" _>
+								<div key={index} className="grid__item">
 									<img
 										src={item.urls.small}
 										alt={item.user.username}

@@ -15,7 +15,7 @@
     border: 1px solid tomato;
 }
 
-/*.grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding: 25px;
@@ -23,20 +23,6 @@
     grid-auto-flow: dense;
     align-items: stretch;
     width: 100%;
-}*/
-.grid {
-  width: 100%;
-    display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  padding: 0;
-  list-style-type: none;
-}
-
-.grid__item {
-  margin: 0 10px 20px;
-  flex: 1 1 290px;
 }
 
 img {
@@ -69,7 +55,6 @@ img {
 .item {
     position: relative;
 }
-
 /************LOADING CSS***************************/
  .loading {
       display: inline-block;

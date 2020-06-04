@@ -2,9 +2,15 @@ import React, { useState } from "react";
 
 const SearchBox = (props) => {
 	const [query, setQuery] = useState("");
+	const [error, setError] = useState("");
 
 	function submitHandler(event) {
-		props.getQueryFunction(query);
+		if (query.length > 0) {
+			setError("");
+			props.getQueryFunction(query);
+		} else {
+			setError("Please Enter The Search Parameter.");
+		}
 	}
 
 	return (
@@ -29,6 +35,10 @@ const SearchBox = (props) => {
 						Search
 					</button>
 				</div>
+				<br />
+			</div>
+			<div>
+				<p className="text-danger">{error.length > 0 ? error : null}</p>
 			</div>
 		</div>
 	);

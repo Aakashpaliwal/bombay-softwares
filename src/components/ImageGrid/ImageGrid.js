@@ -31,7 +31,6 @@ class ImageGrid extends Component {
 		let response = await axios.get(
 			`https://api.unsplash.com/photos/?page=${page}&client_id=${key}&per_page=${this.state.perPage}`
 		);
-		console.log(response);
 		this.setState({
 			images: response.data,
 			totalPhotos: response.headers["x-total"],
@@ -56,39 +55,49 @@ class ImageGrid extends Component {
 								<SearchBox getQueryFunction={this.setQuery} />
 								<div className="">
 									{this.state.filtered_images ? (
-										<Suspense fallback={renderLoader()}>
-											<FilterImageGrid
-												queryvalue={this.state.query}
-											/>
-										</Suspense>
+										<div>
+											<Suspense fallback={renderLoader()}>
+												<FilterImageGrid
+													queryvalue={
+														this.state.query
+													}
+												/>
+											</Suspense>
+										</div>
 									) : (
-										<section className="grid">
-											{this.state.images.length ? (
-												this.state.images.map(function (
-													item,
-													index
-												) {
-													return (
-														<div
-															key={index}
-															className="grid__item"
-														>
-															<img
-																src={
-																	item.urls
-																		.small
-																}
-																alt={
-																	item.user
-																		.username
-																}
-															/>
-														</div>
-													);
-												})
-											) : (
-												<div className="loading" />
-											)}
+										<div>
+											<section className="grid">
+												{this.state.images.length ? (
+													this.state.images.map(
+														function (item, index) {
+															return (
+																<div
+																	key={index}
+																	className={`item item-${Math.ceil(
+																		item.height /
+																			item.width
+																	)}`}
+																>
+																	<img
+																		src={
+																			item
+																				.urls
+																				.small
+																		}
+																		alt={
+																			item
+																				.user
+																				.username
+																		}
+																	/>
+																</div>
+															);
+														}
+													)
+												) : (
+													<div className="loading" />
+												)}
+											</section>
 											<Pagination
 												current={this.state.currentPage}
 												total={this.state.totalPhotos}
@@ -97,7 +106,7 @@ class ImageGrid extends Component {
 													this
 												)}
 											/>
-										</section>
+										</div>
 									)}
 								</div>
 							</div>
