@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import Pagination from "./Pagination";
 
 function FilterImageGrid(props) {
 	const [filterImages, setFilterImages] = useState([]);
@@ -6,6 +7,7 @@ function FilterImageGrid(props) {
 	useEffect(() => {
 		const response = props.filterImageValue;
 		setFilterImages(response);
+		console.log(response);
 	}, [props.filterImageValue]);
 
 	return (
@@ -15,12 +17,7 @@ function FilterImageGrid(props) {
 				{filterImages.length ? (
 					filterImages.map(function (item, index) {
 						return (
-							<div
-								key={index}
-								className={`item item-${Math.ceil(
-									item.height / item.width
-								)}`}
-							>
+							<div key={index} className="grid__item">
 								<img
 									src={item.urls.small}
 									alt={item.user.username}
@@ -32,6 +29,12 @@ function FilterImageGrid(props) {
 					<div className="loading" />
 				)}
 			</section>
+			{/*<Pagination
+				current={this.state.currentPage}
+				total={this.state.totalPhotos}
+				perPage={this.state.perPage}
+				onPageChanged={this.fetchPhotos.bind(this)}
+			/>*/}
 		</div>
 	);
 }

@@ -52,6 +52,8 @@ class ImageGrid extends Component {
 				console.log(res);
 				this.setState({
 					search_images: res.data.results,
+					// totalPhotos: res.headers["x-total"],
+					// currentPage: page,
 					filtered_images: true,
 				});
 			});
@@ -84,10 +86,7 @@ class ImageGrid extends Component {
 													return (
 														<div
 															key={index}
-															className={`item item-${Math.ceil(
-																item.height /
-																	item.width
-															)}`}
+															className="grid__item"
 														>
 															<img
 																src={
@@ -105,15 +104,17 @@ class ImageGrid extends Component {
 											) : (
 												<div className="loading" />
 											)}
+											<Pagination
+												current={this.state.currentPage}
+												total={this.state.totalPhotos}
+												perPage={this.state.perPage}
+												onPageChanged={this.fetchPhotos.bind(
+													this
+												)}
+											/>
 										</section>
 									)}
 								</div>
-								<Pagination
-									current={this.state.currentPage}
-									total={this.state.totalPhotos}
-									perPage={this.state.perPage}
-									onPageChanged={this.fetchPhotos.bind(this)}
-								/>
 							</div>
 						</div>
 					</div>
