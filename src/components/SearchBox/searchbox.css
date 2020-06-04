@@ -1,0 +1,13 @@
+.custom_search_btn_css {
+	border-top-right-radius: 22px!important;
+    border-bottom-right-radius: 22px!important;
+}
+.custom_search_input_css {
+	border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.icon-inner {
+	position: relative;
+	top: 2px;
+	right: 2px;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./searchbox.css";
 const SearchBox = (props) => {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
@@ -18,7 +18,7 @@ const SearchBox = (props) => {
 			<div className="input-group mb-3">
 				<input
 					type="text"
-					className="form-control"
+					className="form-control custom_search_input_css"
 					placeholder="Search Query..."
 					aria-label="Search Query..."
 					aria-describedby="basic-addon2"
@@ -28,11 +28,11 @@ const SearchBox = (props) => {
 				/>
 				<div className="input-group-append">
 					<button
-						className="btn btn-outline-secondary"
+						className="btn btn-outline-secondary custom_search_btn_css"
 						type="button"
 						onClick={submitHandler}
 					>
-						Search
+						<ion-icon name="search-outline"></ion-icon>
 					</button>
 				</div>
 				<br />

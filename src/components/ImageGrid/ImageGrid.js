@@ -2,7 +2,7 @@ import React, { Component, lazy, Suspense } from "react";
 import axios from "axios";
 import "./imagegrid.css";
 import SearchBox from "../SearchBox/SearchBox";
-import Pagination from "./Pagination";
+import Pagination from "../Pagination/Pagination";
 
 const key = "olFKDlOJvm_Rm97aVlPs7j-yRe_ixTempI6ishtyy2E";
 const FilterImageGrid = lazy(() => import("./FilterImageGrid"));
@@ -16,7 +16,7 @@ class ImageGrid extends Component {
 			query: "",
 			filtered_images: false,
 			totalPhotos: 0,
-			perPage: 6,
+			perPage: 10,
 			currentPage: 1,
 		};
 		this.setQuery = this.setQuery.bind(this);

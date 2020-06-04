@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import Pagination from "./Pagination";
+import Pagination from "../Pagination/Pagination";
 import axios from "axios";
 
 const key = "olFKDlOJvm_Rm97aVlPs7j-yRe_ixTempI6ishtyy2E";
@@ -10,7 +10,7 @@ class FilterImageGrid extends Component {
 		this.state = {
 			filterImages: [],
 			totalPhotos: 0,
-			perPage: 6,
+			perPage: 10,
 			currentPage: 1,
 		};
 		this.fetchPhotos = this.fetchPhotos.bind(this);
@@ -41,7 +41,12 @@ class FilterImageGrid extends Component {
 					{this.state.filterImages.length ? (
 						this.state.filterImages.map(function (item, index) {
 							return (
-								<div key={index} className="grid__item">
+								<div
+									key={index}
+									className={`item item-${Math.ceil(
+										item.height / item.width
+									)}`}
+								>
 									<img
 										src={item.urls.small}
 										alt={item.user.username}
