@@ -14,7 +14,6 @@ class ImageGrid extends Component {
 		this.state = {
 			images: [],
 			query: "",
-			search_images: [],
 			filtered_images: false,
 			totalPhotos: 0,
 			perPage: 6,
@@ -42,21 +41,9 @@ class ImageGrid extends Component {
 
 	async setQuery(queryValue) {
 		await this.setState({
+			filtered_images: true,
 			query: queryValue,
 		});
-		await axios
-			.get(
-				`https://api.unsplash.com/search/photos/?query=${this.state.query}/&client_id=${key}`
-			)
-			.then((res) => {
-				console.log(res);
-				this.setState({
-					search_images: res.data.results,
-					// totalPhotos: res.headers["x-total"],
-					// currentPage: page,
-					filtered_images: true,
-				});
-			});
 	}
 
 	render() {
@@ -71,9 +58,7 @@ class ImageGrid extends Component {
 									{this.state.filtered_images ? (
 										<Suspense fallback={renderLoader()}>
 											<FilterImageGrid
-												filterImageValue={
-													this.state.search_images
-												}
+												queryvalue={this.state.query}
 											/>
 										</Suspense>
 									) : (
