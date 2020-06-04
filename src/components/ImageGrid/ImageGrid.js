@@ -3,6 +3,7 @@ import axios from "axios";
 import "./imagegrid.css";
 import FilterImageGrid from "./FilterImageGrid";
 import SearchBox from "../SearchBox/SearchBox";
+import Pagination from "./Pagination";
 
 const key = "olFKDlOJvm_Rm97aVlPs7j-yRe_ixTempI6ishtyy2E";
 
@@ -14,16 +15,27 @@ class ImageGrid extends Component {
 			query: "",
 			search_images: [],
 			filtered_images: false,
+			totalPhotos: 0,
+			perPage: 6,
+			currentPage: 1,
 		};
 		this.setQuery = this.setQuery.bind(this);
+		this.fetchPhotos = this.fetchPhotos.bind(this);
 	}
 
 	async componentDidMount() {
+		this.fetchPhotos(this.state.currentPage);
+	}
+
+	async fetchPhotos(page) {
 		let response = await axios.get(
-			`https://api.unsplash.com/photos/?client_id=${key}&per_page=28`
+			`https://api.unsplash.com/photos/?page=${page}&client_id=${key}&per_page=${this.state.perPage}`
 		);
+		console.log(response);
 		this.setState({
 			images: response.data,
+			totalPhotos: response.headers["x-total"],
+			currentPage: page,
 		});
 	}
 
@@ -93,6 +105,12 @@ class ImageGrid extends Component {
 										</section>
 									)}
 								</div>
+								<Pagination
+									current={this.state.currentPage}
+									total={this.state.totalPhotos}
+									perPage={this.state.perPage}
+									onPageChanged={this.fetchPhotos.bind(this)}
+								/>
 							</div>
 						</div>
 					</div>
