@@ -1,7 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-{/_className={`grid_item item item-${Math.ceil( item.height / item.width )}`}_/}
-
 ## Available Scripts
 
 In the project directory, you can run:
