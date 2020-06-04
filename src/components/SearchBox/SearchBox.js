@@ -4,6 +4,7 @@ const SearchBox = (props) => {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
 
+	//function to change value of query and to send query parameter to parent component
 	function submitHandler(event) {
 		if (query.length > 0) {
 			setError("");

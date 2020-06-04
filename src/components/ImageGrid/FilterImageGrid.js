@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { Component } from "react";
 import Pagination from "../Pagination/Pagination";
 import axios from "axios";
 
@@ -19,6 +19,8 @@ class FilterImageGrid extends Component {
 	componentDidMount() {
 		this.fetchPhotos(this.state.currentPage);
 	}
+
+	//function to fetch filter photos depends on user query
 	async fetchPhotos(page) {
 		await axios
 			.get(

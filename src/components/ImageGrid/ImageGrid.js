@@ -27,6 +27,7 @@ class ImageGrid extends Component {
 		this.fetchPhotos(this.state.currentPage);
 	}
 
+	//function to fetch photos
 	async fetchPhotos(page) {
 		let response = await axios.get(
 			`https://api.unsplash.com/photos/?page=${page}&client_id=${key}&per_page=${this.state.perPage}`
@@ -36,7 +37,10 @@ class ImageGrid extends Component {
 			totalPhotos: response.headers["x-total"],
 			currentPage: page,
 		});
+		console.log(response);
 	}
+
+	//function to get value from searchbox component through props
 
 	async setQuery(queryValue) {
 		await this.setState({
