@@ -1,4 +1,5 @@
 import React, { Component, lazy, Suspense } from "react";
+import { withRouter } from "react-router";
 import axios from "axios";
 import "./imagegrid.css";
 import SearchBox from "../SearchBox/SearchBox";
@@ -25,6 +26,7 @@ class ImageGrid extends Component {
 
 	async componentDidMount() {
 		this.fetchPhotos(this.state.currentPage);
+		console.log(this.props.history);
 	}
 
 	//function to fetch photos
@@ -122,4 +124,4 @@ class ImageGrid extends Component {
 	}
 }
 
-export default ImageGrid;
+export default withRouter(ImageGrid);

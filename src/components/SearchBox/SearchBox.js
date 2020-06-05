@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router";
 import "./searchbox.css";
 const SearchBox = (props) => {
 	const [query, setQuery] = useState("");
@@ -9,8 +10,19 @@ const SearchBox = (props) => {
 		if (query.length > 0) {
 			setError("");
 			props.getQueryFunction(query);
+			// console.log(props);
+			// console.log(`${props.match.url}?q=${query}`);
+			// let newurl = `${props.match.url}?q=${query}`;
+			// props.match.url = newurl;
+			// console.log(props.match.url);
 		} else {
 			setError("Please Enter The Search Parameter.");
+		}
+	}
+
+	function checkEvent(event) {
+		if (event.key == "Enter") {
+			submitHandler();
 		}
 	}
 
@@ -18,7 +30,7 @@ const SearchBox = (props) => {
 		<div>
 			<div className="input-group mb-3">
 				<input
-					type="text"
+					type="Search"
 					className="form-control custom_search_input_css"
 					placeholder="Search Query..."
 					aria-label="Search Query..."
@@ -26,11 +38,12 @@ const SearchBox = (props) => {
 					name="query"
 					value={query}
 					onChange={(e) => setQuery(e.target.value)}
+					onKeyPress={checkEvent}
 				/>
 				<div className="input-group-append">
 					<button
 						className="btn btn-outline-secondary custom_search_btn_css"
-						type="button"
+						type="submit"
 						onClick={submitHandler}
 					>
 						<ion-icon name="search-outline"></ion-icon>
@@ -45,4 +58,4 @@ const SearchBox = (props) => {
 	);
 };
 
-export default SearchBox;
+export default withRouter(SearchBox);
