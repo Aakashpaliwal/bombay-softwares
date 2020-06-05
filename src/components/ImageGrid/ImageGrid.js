@@ -44,8 +44,8 @@ class ImageGrid extends Component {
 
 	async setQuery(queryValue) {
 		await this.setState({
-			filtered_images: true,
 			query: queryValue,
+			filtered_images: true,
 		});
 	}
 

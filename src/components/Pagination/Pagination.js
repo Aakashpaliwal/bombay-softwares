@@ -53,7 +53,13 @@ export default class Pagination extends Component {
 	}
 
 	changePage(page) {
-		this.props.onPageChanged(page);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+		setTimeout(
+			function () {
+				this.props.onPageChanged(page);
+			}.bind(this),
+			500
+		);
 	}
 	render() {
 		return (
@@ -61,21 +67,27 @@ export default class Pagination extends Component {
 				{" "}
 				<div className="pagination">
 					<div className="pagination__left">
-						<a
-							href="#"
-							className={!this.hasPrev() ? "hidden" : ""}
+						<div
+							className={
+								!this.hasPrev()
+									? "hidden"
+									: "pagination_bottom_div"
+							}
 							onClick={(e) => this.changePage(this.prevPage())}
 						>
 							Prev
-						</a>
+						</div>
 					</div>
 
 					<div className="pagination__mid">
 						<ul>
 							<li className={!this.hasFirst() ? "hidden" : ""}>
-								<a href="#" onClick={(e) => this.changePage(1)}>
+								<div
+									className="pagination_bottom_div"
+									onClick={(e) => this.changePage(1)}
+								>
 									1
-								</a>
+								</div>
 							</li>
 							<li className={!this.hasFirst() ? "hidden" : ""}>
 								...
@@ -83,19 +95,18 @@ export default class Pagination extends Component {
 							{this.pages().map((page, index) => {
 								return (
 									<li key={index}>
-										<a
-											href="#"
+										<div
 											onClick={(e) =>
 												this.changePage(page)
 											}
 											className={
 												this.props.current == page
-													? "current"
-													: ""
+													? "pagination_bottom_div"
+													: "pagination_bottom_div"
 											}
 										>
 											{page}
-										</a>
+										</div>
 									</li>
 								);
 							})}
@@ -103,26 +114,29 @@ export default class Pagination extends Component {
 								...
 							</li>
 							<li className={!this.hasLast() ? "hidden" : ""}>
-								<a
-									href="#"
+								<div
+									className="pagination_bottom_div"
 									onClick={(e) =>
 										this.changePage(this.totalPages())
 									}
 								>
 									{this.totalPages()}
-								</a>
+								</div>
 							</li>
 						</ul>
 					</div>
 
 					<div className="pagination__right">
-						<a
-							href="#"
-							className={!this.hasNext() ? "hidden" : ""}
+						<div
+							className={
+								!this.hasNext()
+									? "hidden"
+									: "pagination_bottom_div"
+							}
 							onClick={(e) => this.changePage(this.nextPage())}
 						>
 							Next
-						</a>
+						</div>
 					</div>
 				</div>
 			</div>
