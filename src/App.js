@@ -17,11 +17,11 @@ function App() {
 			<Header />
 			<Suspense fallback={renderLoader()}>
 				<Route path="/" exact={true} component={ImageGrid} />
-				<Route
+				{/*<Route
 					path="/:search"
 					exact={true}
 					component={FilterImageGrid}
-				/>
+				/>*/}
 			</Suspense>
 		</div>
 	);

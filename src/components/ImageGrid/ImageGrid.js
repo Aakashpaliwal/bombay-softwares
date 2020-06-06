@@ -50,11 +50,13 @@ class ImageGrid extends Component {
 			let response = await axios.get(
 				`https://api.unsplash.com/photos/?page=${page}&client_id=${key}&per_page=${this.state.perPage}`
 			);
+
 			this.setState({
 				images: response.data,
 				totalPhotos: response.headers["x-total"],
 				currentPage: page,
 			});
+
 			console.log(response);
 		}
 	}

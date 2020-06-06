@@ -58,7 +58,7 @@ export default class Pagination extends Component {
 			function () {
 				this.props.onPageChanged(page);
 			}.bind(this),
-			500
+			1000
 		);
 	}
 	render() {
