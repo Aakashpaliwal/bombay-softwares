@@ -31,15 +31,32 @@ class ImageGrid extends Component {
 
 	//function to fetch photos
 	async fetchPhotos(page) {
-		let response = await axios.get(
-			`https://api.unsplash.com/photos/?page=${page}&client_id=${key}&per_page=${this.state.perPage}`
-		);
-		this.setState({
-			images: response.data,
-			totalPhotos: response.headers["x-total"],
-			currentPage: page,
-		});
-		console.log(response);
+		if (this.props.history.location.search.length > 0) {
+			await axios
+				.get(
+					`https://api.unsplash.com/search/photos/?page=${page}&query=${this.props.history.location.search}&per_page=${this.state.perPage}/&client_id=${key}`
+				)
+				.then((res) => {
+					console.log(res);
+
+					this.setState({
+						images: res.data.results,
+						totalPhotos: res.headers["x-total"],
+						currentPage: page,
+						// no_data: false,
+					});
+				});
+		} else {
+			let response = await axios.get(
+				`https://api.unsplash.com/photos/?page=${page}&client_id=${key}&per_page=${this.state.perPage}`
+			);
+			this.setState({
+				images: response.data,
+				totalPhotos: response.headers["x-total"],
+				currentPage: page,
+			});
+			console.log(response);
+		}
 	}
 
 	//function to get value from searchbox component through props

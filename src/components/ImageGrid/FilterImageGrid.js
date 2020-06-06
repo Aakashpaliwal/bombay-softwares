@@ -20,7 +20,7 @@ class FilterImageGrid extends Component {
 
 	componentDidMount() {
 		this.fetchPhotos(this.state.currentPage);
-		this.props.history.push(`?q=${this.props.queryvalue}`);
+		this.props.history.push(`/?q=${this.props.queryvalue}`);
 		console.log(this.props.history);
 
 		// console.log(`${this.props.match.url}?q=${this.props.queryvalue}`);
